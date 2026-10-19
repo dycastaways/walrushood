@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>$WHOOD — Walrus Hood</title>
+  <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --blue:#1d6aff;
+      --dark:#0d0d0d;
+      --white:#ffffff;
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--blue);color:#fff;font-family:'Nunito',sans-serif;overflow-x:hidden;}
+
+    /* ── NAV ── */
+    nav{
+      padding:18px 48px;
+      display:flex;justify-content:space-between;align-items:center;
+      position:sticky;top:0;z-index:100;
+      background:rgba(29,106,255,0.85);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .logo{font-family:'Boogaloo',cursive;font-size:22px;letter-spacing:1px;display:flex;align-items:center;gap:8px;}
+    .nav-mid{display:flex;gap:4px;}
+    .nav-mid a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:14px;font-weight:700;padding:8px 18px;border-radius:20px;transition:all .2s;}
+    .nav-mid a:hover{background:rgba(255,255,255,0.15);color:#fff;}
+    .nav-btn{background:#fff;color:var(--blue);border:none;padding:10px 24px;border-radius:24px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:transform .15s,box-shadow .15s;}
+    .nav-btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,0.2);}
+
+    /* ── HERO ── */
+    .hero{
+      display:grid;grid-template-columns:1fr 1fr;align-items:center;
+      min-height:calc(100vh - 61px);
+      padding:60px 48px;
+      gap:40px;
+    }
+    .hero-left{display:flex;flex-direction:column;gap:24px;}
+
+    .live-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);
+      padding:8px 18px;border-radius:40px;
+      font-size:12px;font-weight:800;letter-spacing:1px;
+      width:fit-content;
+    }
+    .live-dot{width:7px;height:7px;background:#5dff6b;border-radius:50%;animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(93,255,107,0.4);}50%{opacity:.6;box-shadow:0 0 0 4px rgba(93,255,107,0);}}
+
+    h1{font-family:'Boogaloo',cursive;font-size:clamp(64px,9vw,116px);line-height:.9;letter-spacing:0px;}
+    h1 .outline{-webkit-text-stroke:2px rgba(255,255,255,0.45);color:transparent;}
+
+    .hero-desc{font-size:clamp(14px,1.6vw,17px);font-weight:600;color:rgba(255,255,255,0.75);line-height:1.7;max-width:400px;}
+
+    .hero-btns{display:flex;gap:10px;flex-wrap:wrap;}
+    .hbtn-main{background:#fff;color:var(--blue);border:none;padding:14px 32px;border-radius:30px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,0.2);transition:transform .15s,box-shadow .15s;}
+    .hbtn-main:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.25);}
+    .hbtn-main:active{transform:translateY(1px);}
+    .hbtn-sec{background:rgba(255,255,255,0.12);color:#fff;border:1.5px solid rgba(255,255,255,0.25);padding:14px 32px;border-radius:30px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;}
+    .hbtn-sec:hover{background:rgba(255,255,255,0.2);border-color:rgba(255,255,255,0.4);}
+
+    .ca-row{
+      display:inline-flex;align-items:center;
+      background:rgba(0,0,0,0.2);border:1.5px solid rgba(255,255,255,0.15);
+      border-radius:12px;overflow:hidden;cursor:pointer;width:fit-content;
+      transition:background .2s;
+    }
+    .ca-row:hover{background:rgba(0,0,0,0.3);}
+    .ca-tag{font-size:10px;font-weight:900;letter-spacing:2.5px;color:rgba(255,255,255,0.45);padding:10px 14px;border-right:1.5px solid rgba(255,255,255,0.1);}
+    .ca-addr{font-size:12px;font-family:monospace;color:rgba(255,255,255,0.55);padding:10px 16px;}
+    .ca-copy{font-size:10px;font-weight:900;letter-spacing:1px;padding:10px 14px;background:rgba(255,255,255,0.07);border-left:1.5px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);transition:all .2s;}
+    .ca-row:hover .ca-copy{background:rgba(255,255,255,0.15);color:#fff;}
+
+    .hero-right{display:flex;justify-content:center;align-items:center;position:relative;}
+    .walrus-wrap{
+      width:clamp(200px,26vw,320px);height:clamp(200px,26vw,320px);
+      border-radius:50%;overflow:hidden;
+      background:#1d6aff;
+      box-shadow:0 0 0 12px rgba(255,255,255,0.2),0 24px 60px rgba(0,0,0,0.2);
+      animation:float 3.5s ease-in-out infinite;
+      position:relative;z-index:2;
+    }
+    .walrus-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 5%;display:block;}
+    .hero-glow{display:none;}
+    @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-16px) rotate(2deg);}}
+
+    /* ── STATS ── */
+    .stats{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      background:rgba(0,0,0,0.18);
+      border-top:1px solid rgba(255,255,255,0.1);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .stat{padding:32px 24px;text-align:center;border-right:1px solid rgba(255,255,255,0.1);}
+    .stat:last-child{border-right:none;}
+    .stat-num{font-family:'Boogaloo',cursive;font-size:clamp(36px,5vw,56px);line-height:1;text-shadow:2px 2px 0 rgba(0,0,0,0.1);}
+    .stat-lbl{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:8px;}
+
+    /* ── ABOUT ── */
+    .about{background:#fff;color:var(--dark);padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .about-left h2{font-family:'Boogaloo',cursive;font-size:clamp(38px,5vw,64px);line-height:1;margin-bottom:16px;}
+    .about-left h2 em{font-style:normal;color:var(--blue);}
+    .about-left p{font-size:16px;font-weight:600;color:#555;line-height:1.8;margin-bottom:28px;}
+    .tags{display:flex;flex-wrap:wrap;gap:8px;}
+    .tag{font-size:12px;font-weight:900;padding:8px 18px;border-radius:20px;}
+    .tag-blue{background:#eef3ff;color:var(--blue);}
+    .tag-dark{background:var(--dark);color:#fff;}
+
+    .facts{display:flex;flex-direction:column;gap:3px;}
+    .fact-row{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;background:#f8f9ff;border-radius:14px;transition:background .2s;}
+    .fact-row:hover{background:#eef3ff;}
+    .fact-key{font-size:14px;font-weight:700;color:#666;}
+    .fact-val{font-size:19px;font-weight:900;color:var(--dark);}
+    .fact-val.accent{color:var(--blue);}
+    .fact-val.muted{font-size:14px;color:#aaa;font-weight:700;}
+
+    /* ── HOW ── */
+    .how{background:var(--dark);color:#fff;padding:80px 48px;text-align:center;}
+    .how h2{font-family:'Boogaloo',cursive;font-size:clamp(38px,5vw,64px);margin-bottom:12px;}
+    .how h2 em{font-style:normal;color:var(--blue);}
+    .how-sub{font-size:15px;color:rgba(255,255,255,0.4);font-weight:600;margin-bottom:48px;}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:960px;margin:0 auto;}
+    .step-card{background:#161616;border-radius:20px;padding:36px 24px;border:1.5px solid transparent;transition:border-color .2s,transform .2s,background .2s;text-align:left;}
+    .step-card:hover{border-color:var(--blue);transform:translateY(-5px);background:#1a1a1a;}
+    .step-num{font-family:'Boogaloo',cursive;font-size:48px;color:var(--blue);line-height:1;margin-bottom:16px;}
+    .step-title{font-size:16px;font-weight:900;margin-bottom:10px;}
+    .step-desc{font-size:13px;line-height:1.75;color:rgba(255,255,255,0.4);}
+
+    /* ── FOOTER ── */
+    footer{background:#090909;padding:36px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+    .f-brand{font-family:'Boogaloo',cursive;font-size:19px;color:var(--blue);}
+    .f-disc{font-size:11px;color:rgba(255,255,255,0.15);max-width:420px;line-height:1.7;text-align:center;}
+    .f-soc{display:flex;gap:8px;}
+    .fsoc-btn{width:38px;height:38px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);text-decoration:none;font-size:14px;transition:all .2s;}
+    .fsoc-btn:hover{background:var(--blue);border-color:var(--blue);color:#fff;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px){
+      nav{padding:14px 20px;}
+      .nav-mid{display:none;}
+      .hero{grid-template-columns:1fr;padding:40px 20px;min-height:auto;gap:36px;}
+      .hero-right{order:-1;}
+      .walrus-wrap{width:220px;height:220px;}
+      .stats{grid-template-columns:1fr 1fr;}
+      .stat:nth-child(2){border-right:none;}
+      .about{grid-template-columns:1fr;padding:56px 20px;gap:40px;}
+      .how{padding:56px 20px;}
+      .steps{grid-template-columns:1fr 1fr;}
+      footer{padding:28px 20px;flex-direction:column;align-items:flex-start;}
+      .f-disc{text-align:left;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">$WHOOD</div>
+  <div class="nav-mid">
+    <a href="#about">About</a>
+    <a href="#how">How to Buy</a>
+  </div>
+  <button class="nav-btn" onclick="window.open('#')">Buy $WHOOD</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <span class="live-badge"><span class="live-dot"></span>Live on Robinhood Chain</span>
+    <h1>WALRUS<br><span class="outline">HOOD</span></h1>
+    <p class="hero-desc">walrus said no tax. walrus locked the LP. walrus renounced. walrus doesn't explain further.</p>
+    <div class="hero-btns">
+      <button class="hbtn-main">Buy $WHOOD</button>
+      <button class="hbtn-sec">View Chart</button>
+    </div>
+    <div class="ca-row" onclick="copyCA()">
+      <span class="ca-tag">CA</span>
+      <span class="ca-addr" id="ca">0x0000...0000</span>
+      <span class="ca-copy" id="cac">COPY</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-glow"></div>
+    <div class="walrus-wrap">
+      <img src="walrus.png" alt="Walrus Hood"/>
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">1B</div><div class="stat-lbl">Supply</div></div>
+  <div class="stat"><div class="stat-num">75%</div><div class="stat-lbl">LP Locked</div></div>
+  <div class="stat"><div class="stat-num">0%</div><div class="stat-lbl">Tax</div></div>
+  <div class="stat"><div class="stat-num" style="font-size:clamp(18px,2.5vw,30px);padding-top:10px">RENOUNCED</div><div class="stat-lbl">Contract</div></div>
+</div>
+
+<section id="about" class="about">
+  <div class="about-left">
+    <h2>ok but <em>why $WHOOD?</em></h2>
+    <p>no presale. no vc. no team dump waiting to happen. walrus launched clean with 75% LP locked from day one. the walrus just holds.</p>
+    <div class="tags">
+      <span class="tag tag-blue">zero tax</span>
+      <span class="tag tag-blue">LP locked</span>
+      <span class="tag tag-dark">no presale</span>
+      <span class="tag tag-dark">renounced</span>
+      <span class="tag tag-blue">robinhood chain</span>
+    </div>
+  </div>
+  <div class="facts">
+    <div class="fact-row"><span class="fact-key">Total Supply</span><span class="fact-val">1,000,000,000</span></div>
+    <div class="fact-row"><span class="fact-key">Liquidity Pool</span><span class="fact-val accent">75% Locked</span></div>
+    <div class="fact-row"><span class="fact-key">Dev & Marketing</span><span class="fact-val muted">25%</span></div>
+    <div class="fact-row"><span class="fact-key">Buy / Sell Tax</span><span class="fact-val accent">0%</span></div>
+    <div class="fact-row"><span class="fact-key">Contract</span><span class="fact-val muted">Renounced</span></div>
+    <div class="fact-row"><span class="fact-key">Network</span><span class="fact-val muted">Robinhood Chain</span></div>
+  </div>
+</section>
+
+<section id="how" class="how">
+  <h2>how to <em>get in.</em></h2>
+  <p class="how-sub">four steps. two minutes. welcome to the gang.</p>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">MetaMask</div>
+      <div class="step-desc">Add Robinhood Chain as a custom network. Google it, takes 2 mins.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">Bridge ETH</div>
+      <div class="step-desc">Use the official Robinhood Chain bridge. Move some ETH over.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Uniswap V4</div>
+      <div class="step-desc">Paste the CA. Set slippage to 2%. Confirm the swap.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <div class="step-title">sit down 🦭</div>
+      <div class="step-desc">that's it. the walrus is doing the rest.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">WALRUS HOOD — $WHOOD</div>
+  <p class="f-disc">$WHOOD is a meme token with no intrinsic value. Not financial advice. DYOR. You could lose everything.</p>
+  <div class="f-soc">
+    <a href="#" class="fsoc-btn">𝕏</a>
+    <a href="#" class="fsoc-btn">✈</a>
+  </div>
+</footer>
+
+<script>
+  function copyCA(){
+    navigator.clipboard.writeText(document.getElementById('ca').textContent).then(()=>{
+      const el=document.getElementById('cac');
+      el.textContent='COPIED!';
+      setTimeout(()=>el.textContent='COPY',2000);
+    });
+  }
+</script>
+</body>
+</html>
